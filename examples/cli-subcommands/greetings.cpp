@@ -2,8 +2,9 @@
  * Example CLI interface for multiple functions.
  */
 
-#include <commandIO.h>
+#include <commandIO.hpp>
 
+using namespace commandIO;
 
 string hi(bool shout) {
   if (shout) {
@@ -36,7 +37,7 @@ int main(int argc, char** argv) {
     func(hi, "hi", "simple greeting",
       param("-s", false, "shout")),
     func(greet, "greet", "personal greeting",
-      param("name", "name")), 
+      param("name", "name")),
     func(flood, "flood", "multiple personal greetings",
       param("name", "name"),
       param("-n", 1, "multiplier")));

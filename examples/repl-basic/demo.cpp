@@ -1,5 +1,6 @@
-#include <commandIO.h>
+#include <commandIO.hpp>
 
+using namespace commandIO;
 
 string greet(string name, int times, bool shout) {
   string greeting = "";

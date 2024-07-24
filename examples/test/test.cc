@@ -1,4 +1,6 @@
-#include <commandIO.h>
+#include <commandIO.hpp>
+
+using namespace commandIO;
 
 
 /*
@@ -42,7 +44,7 @@ int main(int argc, char** argv) {
 
 /*
   interface(
-    f, (const char*)argv[0], "funk the func", 
+    f, (const char*)argv[0], "funk the func",
       param("-a", 2, "set the int"),
       param("name", "name the name"),
       param("-c", true, "flip the flop"),
@@ -52,7 +54,7 @@ int main(int argc, char** argv) {
   while(interface(
     func(pack(&c, &C::i), "i", "class void test",
       param("a", "a")),
-    func(f, "f", "funk the func", 
+    func(f, "f", "funk the func",
       param("-a", 2, "set the int"),
       param("name", "name the name"),
       param("-c", true, "flip the flop"),

@@ -2,8 +2,9 @@
  * Example CLI interface for one function.
  */
 
-#include <commandIO.h>
+#include <commandIO.hpp>
 
+using namespace commandIO;
 
 int sequence(int a, int b, int n) {
   if (n < 0)
@@ -21,7 +22,7 @@ int main(int argc, char* argv[]) {
 
   interface(
     io,
-    sequence, argv[0], "Give the n-th number in a sequence.", 
+    sequence, argv[0], "Give the n-th number in a sequence.",
       param("-a", 0, "first number"),
       param("-b", 1, "second number"),
       param("n", "desired number in the sequence"));

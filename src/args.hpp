@@ -108,7 +108,7 @@ namespace commandIO {
 
 	// Skip optional parameters.
 	template <class A, class D>
-	int updateRequired_(
+	Error updateRequired_(
 			A &argv, D const &defs, int const num, int const count,
 			string const &value) {
 		return updateRequired_(argv.tail, defs.tail, num, count, value);
@@ -116,7 +116,7 @@ namespace commandIO {
 
 	// Entry point.
 	template <class A, class D>
-	int updateRequired(
+	Error updateRequired(
 			A &argv, D const &defs, int const num, string const &value) {
 		return updateRequired_(argv, defs, num, 0, value);
 	}

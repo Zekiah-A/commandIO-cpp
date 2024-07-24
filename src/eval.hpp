@@ -4,6 +4,7 @@
 
 #include "error.hpp"
 #include "tuple.hpp"
+#include "args.hpp"
 
 namespace commandIO {
 
@@ -34,7 +35,7 @@ namespace commandIO {
 	// Void class member function.
 	template <class I, class C, class P, class... FArgs, class... Args>
 	void call_(I &, VoidM<C, P, FArgs...> m, Empty, Args &...args) {
-		(*m.std::head.*m.std::tail.std::head)(args...);
+		(*m.head.*m.tail.head)(args...);
 	}
 
 	// Void function.
@@ -46,13 +47,13 @@ namespace commandIO {
 	// Class member function that returns a value.
 	template <class I, class C, class R, class P, class... FArgs, class... Args>
 	void call_(I &io, RetM<C, R, P, FArgs...> m, Empty, Args &...args) {
-		std::print(io, (*m.std::head.*m.std::tail.std::head)(args...), "\n");
+		print(io, (*m.head.*m.tail.head)(args...), "\n");
 	}
 
 	// Function that returns a value.
 	template <class I, class F, class... Args>
 	void call_(I &io, F f, Empty, Args &...args) {
-		std::print(io, f(args...), "\n");
+		print(io, f(args...), "\n");
 	}
 
 	/*
@@ -63,7 +64,7 @@ namespace commandIO {
 	 */
 	template <class I, class F, class A, class... Args>
 	void call_(I &io, F f, A &argv, Args &...args) {
-		call_(io, f, argv.std::tail, args..., argv.std::head);
+		call_(io, f, argv.tail, args..., argv.head);
 	}
 
 	/*! Call a class member function.
@@ -106,9 +107,9 @@ namespace commandIO {
 	bool parse_(I &io, F f, A &argv, D &defs) {
 		int number{ 0 };
 
-		std::setDefault(argv, defs);
+		setDefault(argv, defs);
 
-		while (not io.std::eol()) {
+		while (!io.eol()) {
 			Error errorCode;
 			string token{ io.read() };
 
@@ -117,7 +118,7 @@ namespace commandIO {
 					return false;
 				}
 
-				errorCode = std::updateOptional(io, argv, defs, token);
+				errorCode = updateOptional(io, argv, defs, token);
 
 				switch (errorCode) {
 					case Error::SUCCESS:
@@ -125,29 +126,29 @@ namespace commandIO {
 					case Error::UNKNOWN_PARAM:
 						break;
 					default:
-						std::print(io, errorMessages[errorCode], token, "\n");
+						print(io, errorMessages[errorCode], token, "\n");
 						return false;
 				}
 			}
 
-			errorCode = std::updateRequired(argv, defs, number, token);
+			errorCode = updateRequired(argv, defs, number, token);
 
 			switch (errorCode) {
 				case Error::SUCCESS:
 					number++;
 					continue;
 				default:
-					std::print(io, errorMessages[errorCode], number + 1, "\n");
+					print(io, errorMessages[errorCode], number + 1, "\n");
 					return false;
 			}
 		}
 
 		int opt;
 		int req;
-		std::countArgs(req, opt, defs);
+		countArgs(req, opt, defs);
 
 		if (number < req) {
-			std::print(io, "Required parameter missing.\n");
+			print(io, "Required parameter missing.\n");
 			return false;
 		}
 
@@ -203,16 +204,16 @@ namespace commandIO {
 	 */
 	template <class I>
 	bool select(I &io, string name) {
-		std::print(io, "Unknown command: ", name, "\n");
-		io.std::flush();
+		print(io, "Unknown command: ", name, "\n");
+		io.flush();
 		return false;
 	}
 
 	// Entry point.
 	template <class I, class H, class... Args>
 	bool select(I &io, string name, H t, Args... args) {
-		if (t.std::tail.std::head == name) {
-			return parse(io, t.std::head, t.std::tail.std::tail.std::tail);
+		if (t.tail.head == name) {
+			return parse(io, t.head, t.tail.tail.tail);
 		}
 		return select(io, name, args...);
 	}

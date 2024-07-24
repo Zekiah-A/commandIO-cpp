@@ -1,4 +1,6 @@
-#include <commandIO.h>
+#include <commandIO.hpp>
+
+using namespace commandIO;
 
 
 class Calculator {
