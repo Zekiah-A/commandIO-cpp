@@ -1,4 +1,4 @@
-EXEC := $(basename $(shell ls *.cc))
+EXEC := $(basename $(shell ls *.cpp))
 OBJS := ../../src/error ../../src/plugins/cli/io ../../src/plugins/repl/io
 
 
@@ -14,10 +14,10 @@ OBJS := $(addsuffix .o, $(OBJS))
 
 all: $(EXEC)
 
-$(EXEC): $(EXEC).cc $(OBJS)
+$(EXEC): $(EXEC).cpp $(OBJS)
 	$(CC) $(CC_ARGS) -o $@ $^
 
-%.o: %.cc
+%.o: %.cpp
 	$(CC) $(CC_ARGS) -o $@ -c $^
 
 check: all
