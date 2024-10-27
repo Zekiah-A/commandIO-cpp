@@ -17,10 +17,10 @@ OBJS := $(addsuffix .o, $(TESTS) $(FIXTURES) $(OBJS))
 
 all: $(EXEC)
 
-$(EXEC): $(MAIN).cc $(OBJS)
+$(EXEC): $(MAIN).cpp $(OBJS)
 	$(CC) $(CC_ARGS) -o $@ $^
 
-%.o: %.cc
+%.o: %.cpp
 	$(CC) $(CC_ARGS) $(INCLUDE) -o $@ -c $<
 
 check: all

@@ -35,9 +35,9 @@
 *.o
 *.os
 *.swp
-examples/adventure/adventure
-examples/calculator/calculator
-examples/demo/demo
-examples/math/math
+examples/cli-single/sequence
+examples/cli-subcommands/greetings
+examples/repl-basic/demo
+examples/repl-class/calculator
 examples/test/test
 tests/run_tests

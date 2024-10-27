@@ -1,4 +1,4 @@
-#include "io.h"
+#include "io.hpp"
 
 /**
  * Check whether a line ending was encountered.
@@ -6,7 +6,7 @@
  * @return `true` if a line ending was encountered, `false` otherwise.
  */
 bool _CLiIO::eol(void) {
-  return _number >= _argc - 1;
+	return _number >= _argc - 1;
 }
 
 /**
@@ -16,10 +16,10 @@ bool _CLiIO::eol(void) {
  * @param argv Array of arguments.
  */
 void _CLiIO::prepare(int argc, char** argv) {
-  _argc = argc;
-  _argv = argv;
-  _number = 0;
-  output = "";
+	_argc = argc;
+	_argv = argv;
+	_number = 0;
+	output = "";
 }
 
 /**
@@ -28,16 +28,16 @@ void _CLiIO::prepare(int argc, char** argv) {
  * @return A string.
  */
 string _CLiIO::read(void) {
-  _number++;
+	_number++;
 
-  return _argv[_number];
+	return _argv[_number];
 }
 
 /**
  *
  */
 void _CLiIO::write(string& data) {
-  output += data;
+	output += data;
 }
 
 
@@ -45,7 +45,7 @@ void _CLiIO::write(string& data) {
  *
  */
 CliIO::CliIO(int argc, char** argv) {
-  _CIO.prepare(argc, argv);
+	_CIO.prepare(argc, argv);
 }
 
 /**
@@ -54,7 +54,7 @@ CliIO::CliIO(int argc, char** argv) {
  * @return `true` if a line ending was encountered, `false` otherwise.
  */
 bool CliIO::eol(void) {
-  return _CIO.eol();
+	return _CIO.eol();
 }
 
 /**
@@ -63,7 +63,7 @@ bool CliIO::eol(void) {
  * @return String.
  */
 string CliIO::read(void) {
-  return _CIO.read();
+	return _CIO.read();
 }
 
 /**
@@ -72,7 +72,7 @@ string CliIO::read(void) {
  * @param data String.
  */
 void CliIO::write(string& data) {
-  _CIO.write(data);
+	_CIO.write(data);
 }
 
 

@@ -7,40 +7,40 @@
 using namespace commandIO;
 
 string hi(bool shout) {
-  if (shout) {
-    return "HELLO WORLD!";
-  }
-  return "Hello world.";
+	if (shout) {
+		return "HELLO WORLD!";
+	}
+	return "Hello world.";
 }
 
 string greet(string name) {
-  return "Hello " + name + ".";
+	return "Hello " + name + ".";
 }
 
 string flood(string name, int times) {
-  string greeting = "";
-  int i;
+	string greeting = "";
+	int i;
 
-  for (i = 0; i < times; i++) {
-    greeting += "Hi " + name + ".\n";
-  }
+	for (i = 0; i < times; i++) {
+		greeting += "Hi " + name + ".\n";
+	}
 
-  return greeting;
+	return greeting;
 }
 
 
 int main(int argc, char** argv) {
-  CliIO io(argc, argv);
+	CliIO io(argc, argv);
 
-  interface(
-    io,
-    func(hi, "hi", "simple greeting",
-      param("-s", false, "shout")),
-    func(greet, "greet", "personal greeting",
-      param("name", "name")),
-    func(flood, "flood", "multiple personal greetings",
-      param("name", "name"),
-      param("-n", 1, "multiplier")));
+	interface(
+		io,
+		func(hi, "hi", "simple greeting",
+			param("-s", false, "shout")),
+		func(greet, "greet", "personal greeting",
+			param("name", "name")),
+		func(flood, "flood", "multiple personal greetings",
+			param("name", "name"),
+			param("-n", 1, "multiplier")));
 
-  return 0;
+	return 0;
 }

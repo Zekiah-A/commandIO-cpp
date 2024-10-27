@@ -1,4 +1,4 @@
-#include "io.h"
+#include "io.hpp"
 
 /**
  * Check whether a line ending was encountered.
@@ -6,7 +6,7 @@
  * @return `true` if a line ending was encountered, `false` otherwise.
  */
 bool _ReplIO::eol(void) {
-  return _endOfLine || _number >= _argc - 1; // || needed?
+	return _endOfLine || _number >= _argc - 1; // || needed?
 }
 
 /**
@@ -16,11 +16,11 @@ bool _ReplIO::eol(void) {
  * @param argv Array of arguments.
  */
 void _ReplIO::prepare(int argc, char** argv) {
-  _argc = argc;
-  _argv = argv;
-  _endOfLine = false;
-  _number = -1;
-  output = "";
+	_argc = argc;
+	_argv = argv;
+	_endOfLine = false;
+	_number = -1;
+	output = "";
 }
 
 /**
@@ -29,33 +29,33 @@ void _ReplIO::prepare(int argc, char** argv) {
  * @return A string.
  */
 string _ReplIO::read(void) {
-  string s;
-  int i;
+	string s;
+	int i;
 
-  _number++;
+	_number++;
 
-  if (_number > _argc - 1) {
-    return "exit";
-  }
+	if (_number > _argc - 1) {
+		return "exit";
+	}
 
-  s = _argv[_number];
-  i = s.size() - 1;
+	s = _argv[_number];
+	i = s.size() - 1;
 
-  _endOfLine = false;
+	_endOfLine = false;
 
-  if (s[i] == '\n') {
-    _endOfLine = true;
-    return s.substr(0, i);
-  }
+	if (s[i] == '\n') {
+		_endOfLine = true;
+		return s.substr(0, i);
+	}
 
-  return _argv[_number];
+	return _argv[_number];
 }
 
 /*
  *
  */
 void _ReplIO::write(string& data) {
-  output += data;
+	output += data;
 }
 
 
@@ -65,7 +65,7 @@ void _ReplIO::write(string& data) {
  * @return `true` if a line ending was encountered, `false` otherwise.
  */
 bool ReplIO::eol(void) {
-  return _RIO.eol();
+	return _RIO.eol();
 }
 
 /**
@@ -74,7 +74,7 @@ bool ReplIO::eol(void) {
  * @return String.
  */
 string ReplIO::read(void) {
-  return _RIO.read();
+	return _RIO.read();
 }
 
 /**
@@ -83,7 +83,7 @@ string ReplIO::read(void) {
  * @param data String.
  */
 void ReplIO::write(string& data) {
-  _RIO.write(data);
+	_RIO.write(data);
 }
 
 
